@@ -6,7 +6,6 @@ import com.google.gson.JsonElement
 import com.google.gson.JsonParseException
 import com.shaadi.demo.model.Profile
 import java.lang.reflect.Type
-import kotlin.jvm.Throws
 
 
 class ProfileTypeAdapter  :

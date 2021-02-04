@@ -27,6 +27,12 @@ class ProfileListFragment : Fragment(), ProfileEventListener {
     @Inject
     lateinit var profileListAdapter: ProfileListAdapter
 
+    companion object {
+        fun newInstance() : ProfileListFragment {
+            return ProfileListFragment()
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

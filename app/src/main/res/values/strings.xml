@@ -5,5 +5,5 @@
     <string name="text_decline">Decline</string>
     <string name="text_invite_accepted">Invite Accepted</string>
     <string name="text_invite_declined">Invite Declined</string>
-    <string name="text_updating_data">Updating data…</string>
+    <string name="text_updating_data">Refreshing data from API…</string>
 </resources>
