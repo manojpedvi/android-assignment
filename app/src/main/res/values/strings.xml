@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Shaadi Demo</string>
+    <string name="text_error">Something went wrong.\nMake sure you are connected to the internet &amp; try again :(</string>
+    <string name="text_accept">Accept</string>
+    <string name="text_decline">Decline</string>
+    <string name="text_invite_accepted">Invite Accepted</string>
+    <string name="text_invite_declined">Invite Declined</string>
+</resources>
