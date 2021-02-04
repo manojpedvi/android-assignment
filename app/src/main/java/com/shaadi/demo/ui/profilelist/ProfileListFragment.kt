@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -12,6 +13,7 @@ import com.shaadi.demo.R
 import com.shaadi.demo.constant.RetrofitStatus
 import com.shaadi.demo.databinding.FragmentProfileListBinding
 import com.shaadi.demo.model.Profile
+import com.shaadi.demo.model.ProfileResponse
 import com.shaadi.demo.ui.profilelist.adapter.ProfileEventListener
 import com.shaadi.demo.ui.profilelist.adapter.ProfileListAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,27 +42,32 @@ class ProfileListFragment : Fragment(), ProfileEventListener {
         super.onActivityCreated(savedInstanceState)
 
         profileViewModel.profiles.observe(viewLifecycleOwner, Observer { response ->
-            when (response.status) {
-                RetrofitStatus.SUCCESS -> response.results.let { profiles ->
-                    profileListAdapter.setProfiles(profiles, this)
-                    binding.textError.visibility = View.GONE
-                    binding.recyclerview.visibility = View.VISIBLE
-                }
-                else -> {
-                    binding.textError.text = resources.getString(R.string.text_error)
-                    binding.recyclerview.visibility = View.GONE
-                    binding.textError.visibility = View.VISIBLE
-                }
-            }
-            binding.swipeRefreshLayout.isRefreshing = false
+            updateUI(response)
         })
         binding.recyclerview.apply {
             adapter = profileListAdapter
         }
         binding.swipeRefreshLayout.setOnRefreshListener {
+            Toast.makeText(context, R.string.text_updating_data, Toast.LENGTH_SHORT).show()
             profileViewModel.getProfiles(true)
         }
         binding.swipeRefreshLayout.isRefreshing = true
+    }
+
+    private fun updateUI(response: ProfileResponse) {
+        when (response.status) {
+            RetrofitStatus.SUCCESS -> response.results.let { profiles ->
+                profileListAdapter.setProfiles(profiles, this)
+                binding.textError.visibility = View.GONE
+                binding.recyclerview.visibility = View.VISIBLE
+            }
+            else -> {
+                binding.textError.text = resources.getString(R.string.text_error)
+                binding.recyclerview.visibility = View.GONE
+                binding.textError.visibility = View.VISIBLE
+            }
+        }
+        binding.swipeRefreshLayout.isRefreshing = false
     }
 
     override fun onAcceptClick(profile: Profile, position: Int) {
