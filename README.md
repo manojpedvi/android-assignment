@@ -1,3 +1,18 @@
+## Features
+
+Fetch data from API
+
+Cache remote data locally
+
+Load local data if available
+
+Swipe to refresh to force refresh from network
+
+Image caching
+
+Font Resources
+
+
 ## Libraries Used
 
 Retrofit for API calls
